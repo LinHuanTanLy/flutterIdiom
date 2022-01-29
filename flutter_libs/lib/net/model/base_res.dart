@@ -4,25 +4,22 @@ class BaseRes {
   // 状态码
 
   String? resultMsg;
-  String? result;
-  int? resultCode;
+  String? resultCode;
   var resultData;
 
-  BaseRes({this.resultMsg, this.result, this.resultCode, this.resultData});
+  BaseRes({this.resultMsg, this.resultCode, this.resultData});
 
   BaseRes.fromJson(Map<String, dynamic> json) {
-    resultMsg = json['resultMsg'];
-    result = json['result'];
-    resultCode = int.parse(json['resultCode'].toString());
-    resultData = json['resultData'];
+    resultMsg = json['message'];
+    resultCode = json['code'];
+    resultData = json['data'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['resultMsg'] = resultMsg;
-    data['result'] = result;
-    data['resultCode'] = resultCode;
-    data['resultData'] = resultData;
+    data['message'] = resultMsg;
+    data['code'] = resultCode;
+    data['data'] = resultData;
     return data;
   }
 }

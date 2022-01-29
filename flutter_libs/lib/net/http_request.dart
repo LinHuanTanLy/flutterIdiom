@@ -299,7 +299,7 @@ class HttpRequest {
     if (errorCallback != null) {
       errorCallback(errorMsg);
     }
-    return BaseRes(resultMsg: errorMsg, result: 'fail', resultCode: errorCode);
+    return BaseRes(resultMsg: errorMsg,  resultCode: errorCode.toString());
   }
 
   // 生成 DioOptions

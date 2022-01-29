@@ -18,6 +18,13 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PageBar(context,title: "首页",ifGoback: false,),
+      body: Column(children: [
+
+
+        ElevatedButton(onPressed: (){
+          logic.toIdiom();
+        }, child: Text('猜成语'))
+      ],),
     );
   }
 }

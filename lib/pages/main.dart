@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_libs/res/my_colors.dart';
+import 'package:flutter_libs/res/my_unit.dart';
 import 'package:flutter_libs/utils/toast_utils.dart';
+import 'package:flutter_libs/utils/screen_utils.dart';
 
 import 'home/home_view.dart';
 import 'person/person_view.dart';
@@ -43,6 +45,7 @@ class _MainState extends State<Main> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtils.init(context);
     return WillPopScope(
       onWillPop: _doExitApp,
       child: Scaffold(
@@ -55,14 +58,14 @@ class _MainState extends State<Main> {
           shape: const CircularNotchedRectangle(),
           notchMargin: 4,
           child: SizedBox(
-            height: 60,
+            height: MyUnit.w120,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 IconButton(
                     icon: Icon(
                       Icons.home,
-                      size: 30,
+                    size: MyUnit.w60,
                       color:
                           _currIndex == 0 ? MyColors.cFF445E : MyColors.c3C3C3C,
                     ),
@@ -75,7 +78,7 @@ class _MainState extends State<Main> {
                 IconButton(
                     icon: Icon(
                       Icons.person,
-                      size: 30,
+                      size: MyUnit.w60,
                       color:
                           _currIndex == 1 ? MyColors.cFF445E : MyColors.c3C3C3C,
                     ),

@@ -4,6 +4,7 @@ import 'dart:io';
 import 'dart:developer' as devloper;
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_libs/init/libs_init.dart';
 import 'package:flutter_libs/utils/toast_utils.dart';
@@ -50,14 +51,15 @@ class HttpRequest {
       receiveTimeout: 300000,
       baseUrl: LibsInitUtils.appBaseUrl,
     ));
-
-    (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-        (client) {
-      client.badCertificateCallback =
-          (X509Certificate cert, String host, int port) {
-        return true;
+    if (!kIsWeb) {
+      (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+          (client) {
+        client.badCertificateCallback =
+            (X509Certificate cert, String host, int port) {
+          return true;
+        };
       };
-    };
+    }
   }
 
   getDio() {
@@ -257,7 +259,6 @@ class HttpRequest {
 
   static _handRes(response, errorCallBack, callBack, BuildContext? context,
       bool isShowErrorToast) {
-   
     String errorMsg = "";
     int statusCode;
 
@@ -278,28 +279,26 @@ class HttpRequest {
         return baseRes;
       } catch (e) {
         errorMsg = "网络请求数据解析错误";
-        return _handError(errorCallBack, errorMsg, 888,
-            context, isShowErrorToast);
+        return _handError(
+            errorCallBack, errorMsg, 888, context, isShowErrorToast);
       }
     } else {
       errorMsg = "网络请求错误,状态码:" + statusCode.toString();
-      return _handError(errorCallBack, errorMsg, 999,
-          context, isShowErrorToast);
+      return _handError(
+          errorCallBack, errorMsg, 999, context, isShowErrorToast);
     }
   }
 
   //处理异常
   static BaseRes _handError(Function? errorCallback, String errorMsg,
       int errorCode, BuildContext? context, bool isShowErrorToast) {
-   
-
     if (isShowErrorToast) {
       Toast.show(errorMsg);
     }
     if (errorCallback != null) {
       errorCallback(errorMsg);
     }
-    return BaseRes(resultMsg: errorMsg,  resultCode: errorCode.toString());
+    return BaseRes(resultMsg: errorMsg, resultCode: errorCode.toString());
   }
 
   // 生成 DioOptions
@@ -309,6 +308,4 @@ class HttpRequest {
     options.responseType = ResponseType.json;
     return options;
   }
-
- 
 }

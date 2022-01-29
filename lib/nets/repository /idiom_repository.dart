@@ -11,11 +11,11 @@ class IdiomRepository {
       callBack: (data) {},
       params: {'pageSize': 10, 'pageNum': pageNum},
     );
-
-    debugPrint('the res is ${res?.resultCode}');
-    debugPrint('the res is ${res?.resultData}');
-    if (res?.resultCode == 200 && res?.resultData != null) {
-    } else {}
-    return [];
+    if (res?.resultCode == "200") {
+      List _tempList = res?.resultData ?? [];
+      return _tempList.map((e) => IdiomList.fromJson(e)).toList();
+    } else {
+      return [];
+    }
   }
 }

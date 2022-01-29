@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_libs/flutter_libs.dart';
+import 'package:flutter_libs/widget/page_bar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -50,9 +51,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
+        appBar:PageBar(context,title: "xxx",),
         body: Center(
           child: Text('Running on: $_platformVersion\n'),
         ),

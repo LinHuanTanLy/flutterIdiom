@@ -10,6 +10,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  get: ^4.6.1
+  fluttertoast: ^8.0.8
+  flutter_screenutil: ^5.1.1
+  dio: ^4.0.4
+  pull_to_refresh: ^2.0.0
+  permission_handler: ^8.3.0
 
 dev_dependencies:
   flutter_test:
@@ -35,7 +41,9 @@ flutter:
       some_platform:
         pluginClass: somePluginClass
     # -------------------
-
+    assets:
+      - assets/images/
+      - assets/images/icon_back_black.png
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

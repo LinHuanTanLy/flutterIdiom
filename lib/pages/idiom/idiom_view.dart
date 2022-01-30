@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_libs/res/my_colors.dart';
 import 'package:flutter_libs/widget/loading_widget.dart';
 import 'package:flutter_libs/widget/page_bar.dart';
+import 'package:flutter_libs/widget/img_widget.dart';
 import 'package:get/get.dart';
 import 'package:flutter_libs/res/my_unit.dart';
 
@@ -30,10 +31,10 @@ class IdiomPage extends StatelessWidget {
             height: MyUnit.w700,
             width: MyUnit.w750,
             child: GetBuilder<IdiomLogic>(
-              id: 'vp_content',
+              id: logic.img,
               builder: (_) {
-                return state.getFrist() != null
-                    ? Image.network(state.getFrist()?.imgUrl ?? "")
+                return state.currOne != null
+                    ? ImgWidget(url:state.currOne?.imgUrl ?? "")
                     : const Center(
                         child: LoadingWidget(),
                       );
@@ -47,7 +48,7 @@ class IdiomPage extends StatelessWidget {
               }
             },
             child: GetBuilder<IdiomLogic>(
-              id: 'answer',
+              id: logic.answer,
               builder: (_) {
                 return Container(
                   decoration: BoxDecoration(
